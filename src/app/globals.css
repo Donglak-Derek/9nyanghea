@@ -1,33 +1,66 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-ink: #1b2745;
+  --color-muted: #7a839c;
+  --color-card: #ffffff;
+  --color-surface: #fdf9ff;
+  --gradient-start: #7fe7d5;
+  --gradient-mid: #ffc78f;
+  --gradient-end: #f7a6d9;
+  --glow: rgba(255, 255, 255, 0.8);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-background: var(--color-surface);
+  --color-foreground: var(--color-ink);
+  --font-sans: var(--font-body);
+  --font-brand: var(--font-brand);
 }
 
 body {
-  background: #f8fafc;
-  color: #0f172a;
-  font-family: var(--font-geist-sans), "Pretendard", system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", sans-serif;
   min-height: 100vh;
+  background-color: var(--color-surface);
+  background-image: radial-gradient(
+      circle at 10% 20%,
+      rgba(255, 255, 255, 0.9) 0,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(255, 221, 248, 0.9) 0,
+      transparent 40%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(127, 231, 213, 0.15),
+      rgba(247, 166, 217, 0.15)
+    );
+  color: var(--color-ink);
+  font-family: var(--font-body), "Pretendard", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-.section-title {
-  font-weight: 600;
+.brand-title {
+  font-family: var(--font-brand), "Nunito", system-ui, sans-serif;
   letter-spacing: -0.01em;
+}
+
+.soft-card {
+  border-radius: 28px;
+  background: var(--color-card);
+  box-shadow: 0 20px 45px rgba(27, 39, 69, 0.08);
+}
+
+.pill-button {
+  border-radius: 999px;
+  padding: 0.65rem 1.4rem;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pill-button:focus-visible,
+.pill-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px rgba(27, 39, 69, 0.18);
 }
