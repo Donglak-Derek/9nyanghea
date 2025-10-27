@@ -46,7 +46,7 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
   const nextPost = posts[currentIndex + 1] || null;
   const relatedPosts = posts
     .filter(
-      (item) => item.slug !== post.slug && item.category === post.category,
+      (item) => item.slug !== post.slug && item.category === post.category
     )
     .slice(0, 2);
 
@@ -55,41 +55,34 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="pill-button inline-flex items-center bg-white/80 text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-ink)] shadow-sm hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gradient-end)] focus-visible:ring-offset-2"
+          className="pill-button inline-flex items-center bg-white/80 text-xs font-semibold uppercase tracking-[0.25em] text-ink shadow-sm hover:bg-white focus-ring-brand"
         >
           ← Back to home
         </Link>
 
-        <article className="soft-card mt-6 rounded-[32px] border border-white/60 bg-white/90 p-6 sm:p-8">
-          <div className="flex flex-wrap gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-muted)]">
-            <span className="rounded-full bg-slate-100 px-3 py-1 text-[var(--color-ink)]">
+        <article className="soft-card mt-6 rounded-4xl border border-white/60 bg-white/90 p-6 sm:p-8">
+          <div className="flex flex-wrap gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-muted">
+            <span className="rounded-full bg-slate-100 px-3 py-1 text-ink">
               {post.level}
             </span>
             <span>{post.focus}</span>
             <span>{post.minutes} min read</span>
-            <span className="text-[var(--color-ink)]">
-              {categoryMap[post.category].title}
-            </span>
+            <span className="text-ink">{categoryMap[post.category].title}</span>
           </div>
-          <h1 className="brand-title mt-4 text-3xl text-[var(--color-ink)] sm:text-4xl">
+          <h1 className="brand-title mt-4 text-3xl text-ink sm:text-4xl">
             {post.title}
           </h1>
-          <p className="mt-3 text-base text-[var(--color-muted)]">
-            {post.summary}
-          </p>
+          <p className="mt-3 text-base text-muted">{post.summary}</p>
           <div
-            className="mt-5 rounded-[24px] px-5 py-4 text-[var(--color-ink)] shadow-inner"
+            className="mt-5 rounded-3xl px-5 py-4 text-ink shadow-inner"
             style={{
               background:
                 "linear-gradient(120deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end))",
-              color: "#0f1321",
             }}
           >
             {post.intro}
           </div>
-
-And I should check the patch to ensure it follows tailwind classes. 
-
+          And I should check the patch to ensure it follows tailwind classes.
           <section className="mt-8 space-y-6" aria-label="Lesson sections">
             {post.sections.map((section) => {
               const sectionId = section.heading
@@ -105,24 +98,24 @@ And I should check the patch to ensure it follows tailwind classes.
                 >
                   <div className="border-b border-white/60 px-5 py-4">
                     <div className="flex items-center justify-between gap-4">
-                      <h2 className="brand-title text-xl text-[var(--color-ink)]">
+                      <h2 className="brand-title text-xl text-ink">
                         {section.heading}
                       </h2>
                       <Link
                         href={`#${sectionId}`}
-                        className="text-sm font-semibold text-[var(--color-muted)] underline-offset-2 hover:text-[var(--color-ink)]"
+                        className="text-sm font-semibold text-muted underline-offset-2 hover:text-ink"
                       >
                         #
                       </Link>
                     </div>
-                    <p className="mt-2 text-sm text-[var(--color-muted)]">
+                    <p className="mt-2 text-sm text-muted">
                       {section.description}
                     </p>
                   </div>
-                  <ul className="space-y-2 px-5 py-4 text-sm text-[var(--color-ink)]">
+                  <ul className="space-y-2 px-5 py-4 text-sm text-ink">
                     {section.drills.map((drill) => (
                       <li key={drill} className="flex items-start gap-2">
-                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--gradient-end)]" />
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-(--gradient-end)" />
                         {drill}
                       </li>
                     ))}
@@ -131,10 +124,9 @@ And I should check the patch to ensure it follows tailwind classes.
               );
             })}
           </section>
-
           <section
             id="final-mission"
-            className="mt-10 rounded-[32px] p-6 text-white"
+            className="mt-10 rounded-4xl p-6 text-white"
             style={{
               background:
                 "linear-gradient(135deg, var(--gradient-start), var(--gradient-end))",
@@ -151,7 +143,9 @@ And I should check the patch to ensure it follows tailwind classes.
                 #
               </Link>
             </div>
-            <h2 className="mt-2 text-2xl font-semibold">{post.mission.title}</h2>
+            <h2 className="mt-2 text-2xl font-semibold">
+              {post.mission.title}
+            </h2>
             <ol className="mt-4 space-y-3 text-sm">
               {post.mission.steps.map((step, index) => (
                 <li key={step} className="flex items-start gap-3">
@@ -163,11 +157,10 @@ And I should check the patch to ensure it follows tailwind classes.
               ))}
             </ol>
           </section>
-
           <section className="mt-10 space-y-6" aria-label="Continue exploring">
             {relatedPosts.length > 0 && (
               <div className="rounded-[28px] border border-white/60 bg-white/90 p-5 shadow-lg shadow-[rgba(27,39,69,0.08)]">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-muted)]">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                   Related · {categoryMap[post.category].title}
                 </p>
                 <ul className="mt-4 space-y-3 text-sm">
@@ -175,12 +168,12 @@ And I should check the patch to ensure it follows tailwind classes.
                     <li key={relatedPost.slug}>
                       <Link
                         href={`/blog/${relatedPost.slug}`}
-                        className="flex flex-col rounded-2xl bg-white/60 px-3 py-2 transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gradient-end)] focus-visible:ring-offset-2"
+                        className="flex flex-col rounded-2xl bg-white/60 px-3 py-2 transition hover:bg-white focus-ring-brand"
                       >
-                        <span className="brand-title font-semibold text-[var(--color-ink)]">
+                        <span className="brand-title font-semibold text-ink">
                           {relatedPost.title}
                         </span>
-                        <span className="text-xs uppercase tracking-[0.2em] text-[var(--color-muted)]">
+                        <span className="text-xs uppercase tracking-[0.2em] text-muted">
                           {relatedPost.minutes} min · {relatedPost.focus}
                         </span>
                       </Link>
@@ -192,27 +185,27 @@ And I should check the patch to ensure it follows tailwind classes.
 
             <nav
               aria-label="Post navigation"
-              className="flex flex-col gap-3 rounded-[28px] border border-dashed border-white/70 bg-white/80 p-5 text-sm text-[var(--color-ink)] shadow-sm sm:flex-row sm:items-center sm:justify-between"
+              className="flex flex-col gap-3 rounded-[28px] border border-dashed border-white/70 bg-white/80 p-5 text-sm text-ink shadow-sm sm:flex-row sm:items-center sm:justify-between"
             >
               {prevPost ? (
                 <Link
                   href={`/blog/${prevPost.slug}`}
-                  className="inline-flex items-center gap-2 font-semibold text-[var(--color-ink)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gradient-end)] focus-visible:ring-offset-2"
+                  className="inline-flex items-center gap-2 font-semibold text-ink underline-offset-4 hover:underline focus-ring-brand"
                 >
                   ← {prevPost.title}
                 </Link>
               ) : (
-                <span className="text-[var(--color-muted)]">← First lesson</span>
+                <span className="text-muted">← First lesson</span>
               )}
               {nextPost ? (
                 <Link
                   href={`/blog/${nextPost.slug}`}
-                  className="inline-flex items-center gap-2 font-semibold text-[var(--color-ink)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gradient-end)] focus-visible:ring-offset-2"
+                  className="inline-flex items-center gap-2 font-semibold text-ink underline-offset-4 hover:underline focus-ring-brand"
                 >
                   {nextPost.title} →
                 </Link>
               ) : (
-                <span className="text-[var(--color-muted)]">Last lesson →</span>
+                <span className="text-muted">Last lesson →</span>
               )}
             </nav>
           </section>

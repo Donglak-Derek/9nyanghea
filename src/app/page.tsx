@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { posts } from "@/data/posts";
 import type { CategoryId } from "@/data/types";
 
@@ -16,7 +17,8 @@ const filterButtons: { id: FilterId; label: string }[] = [
 ];
 
 const sortedPosts = [...posts].sort(
-  (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+  (a, b) =>
+    new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
 );
 
 export default function Home() {
@@ -40,15 +42,27 @@ export default function Home() {
     <div className="min-h-screen">
       <header className="mx-auto flex max-w-4xl flex-col items-center gap-6 px-5 py-16 text-center sm:py-20">
         <div
-          className="soft-card relative flex flex-col items-center gap-3 px-8 py-8"
+          className="soft-card relative flex flex-col items-center gap-4 px-8 py-8"
           style={{
             background:
               "linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end))",
           }}
         >
-          <span className="absolute -top-3 left-8 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/70 text-lg font-bold text-[var(--color-ink)] shadow-md">
-            9
-          </span>
+          <div className="flex flex-col items-center gap-0">
+            <div className="relative h-40 w-40 drop-shadow-lg">
+              <Image
+                src="/assets/brand/9Nyanghea logo.png"
+                alt="9NyangHea logo"
+                fill
+                sizes="80px"
+                priority
+                className="object-contain"
+              />
+            </div>
+            <span className="brand-title text-2xl font-extrabold text-white drop-shadow">
+              9NyangHea
+            </span>
+          </div>
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-white/80">
             Fun Korean Learning
           </p>
@@ -73,8 +87,8 @@ export default function Home() {
                 onClick={() => handleFilterChange(filter.id)}
                 className={`pill-button border text-sm ${
                   isActive
-                    ? "border-transparent bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] text-white shadow-lg"
-                    : "border-white/70 bg-white/80 text-[var(--color-ink)] shadow-sm hover:border-white"
+                    ? "border-transparent bg-linear-to-r from-(--gradient-start) via-(--gradient-mid) to-(--gradient-end) text-white shadow-lg"
+                    : "border-white/70 bg-white/80 text-ink shadow-sm hover:border-white"
                 }`}
               >
                 {filter.label}
@@ -89,28 +103,26 @@ export default function Home() {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="soft-card group block rounded-[30px] border border-white/60 p-6 transition hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gradient-end)] focus-visible:ring-offset-2"
+                className="soft-card group block rounded-[30px] border border-white/60 p-6 transition hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--gradient-end) focus-visible:ring-offset-2"
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-muted)]">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">
                   {post.minutes} min · {post.focus}
                 </p>
-                <h2 className="brand-title mt-3 text-2xl text-[var(--color-ink)]">
+                <h2 className="brand-title mt-3 text-2xl text-ink">
                   {post.title}
                 </h2>
-                <p className="mt-2 text-sm text-[var(--color-muted)]">
-                  {post.summary}
-                </p>
+                <p className="mt-2 text-sm text-muted">{post.summary}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {post.vocabulary.slice(0, 3).map((word) => (
                     <span
                       key={word}
-                      className="rounded-full bg-slate-100/80 px-3 py-1 text-xs font-semibold text-[var(--color-ink)]"
+                      className="rounded-full bg-slate-100/80 px-3 py-1 text-xs font-semibold text-ink"
                     >
                       {word}
                     </span>
                   ))}
                 </div>
-                <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-ink)]">
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-ink">
                   Read post →
                 </span>
               </Link>
@@ -122,7 +134,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => setVisibleCount((count) => count + 6)}
-                className="pill-button border border-white/70 bg-white/90 text-[var(--color-ink)] shadow-sm hover:border-white"
+                className="pill-button border border-white/70 bg-white/90 text-ink shadow-sm hover:border-white"
               >
                 Show more
               </button>
@@ -133,7 +145,7 @@ export default function Home() {
 
       <section
         id="newsletter"
-        className="mx-auto mt-4 max-w-5xl rounded-[32px] border border-white/40 bg-[var(--color-ink)]/95 px-6 py-10 text-white shadow-2xl sm:px-8"
+        className="mx-auto mt-4 max-w-5xl rounded-4xl border border-white/40 bg-(--color-ink)/95 px-6 py-10 text-white shadow-2xl sm:px-8"
       >
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="lg:max-w-md">
@@ -156,7 +168,7 @@ export default function Home() {
             />
             <button
               type="submit"
-              className="pill-button w-full border-none bg-white text-[var(--color-ink)] md:w-auto"
+              className="pill-button w-full border-none bg-white text-ink md:w-auto"
             >
               Subscribe
             </button>

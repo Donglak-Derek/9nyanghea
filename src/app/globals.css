@@ -64,3 +64,29 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 12px 22px rgba(27, 39, 69, 0.18);
 }
+
+.text-ink {
+  color: var(--color-ink);
+}
+
+.text-muted {
+  color: var(--color-muted);
+}
+
+.bg-card {
+  background-color: var(--color-card);
+}
+
+.brand-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--gradient-start),
+    var(--gradient-mid),
+    var(--gradient-end)
+  );
+}
+
+.focus-ring-brand:focus-visible {
+  outline: 2px solid var(--gradient-end);
+  outline-offset: 2px;
+}
